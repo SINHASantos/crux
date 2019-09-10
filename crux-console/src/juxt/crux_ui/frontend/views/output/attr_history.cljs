@@ -48,6 +48,8 @@
   (str "This view composes `history-range` and `documents` endpoints to\n"
        "give you a some understanding of how an entity attribute has changed over valid time.\n"
        "This view is limited to display up to 7 entities.\n"
+       "You can use \"put with valid time\" example to transact in\n"
+       "some historical data for. Use that entity id later in your query.\n"
        "\n"
        "Try to run a query that will include a numeric attribute like:\n"
        "{:find [e p]\n"
