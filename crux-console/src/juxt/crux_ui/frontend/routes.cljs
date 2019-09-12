@@ -33,8 +33,11 @@
 
 (def ^:private path-for (partial bidi/path-for routes))
 
-(defn path-for-tab [tab-name]
-  (path-for :rd/query-ui-output-tab :r/output-tab (name tab-name)))
+(defn path-for-tab [tab-name {:r/keys [search]}]
+  (str (path-for :rd/query-ui-output-tab
+                 :r/output-tab
+                 (name tab-name))
+       search))
 
 (defn query-str->map [^js/String query]
   (let [raw-map (into {} (js->clj (js/Array.from (js/URLSearchParams. query))))]

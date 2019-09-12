@@ -46,10 +46,10 @@
 
 (defn- tab [title tab-id]
   {:tabs/title title
-   :tabs/href  (routes/path-for-tab tab-id)
+   :tabs/href  (routes/path-for-tab tab-id {:r/search js/location.search})
    :tabs/id    tab-id})
 
-(def desktop-tabs
+(defn- desktop-tabs []
   [(tab "table" :db.ui.output-tab/table)
    (tab "tree" :db.ui.output-tab/tree)
    (tab "attribute frequencies" :db.ui.output-tab/attr-stats)
@@ -57,7 +57,7 @@
    (tab "transactions" :db.ui.output-tab/tx-history)
    (tab "edn output" :db.ui.output-tab/edn)])
 
-(def mobile-tabs
+(defn- mobile-tabs []
   [(tab "Table" :db.ui.output-tab/table)
    (tab "Tree" :db.ui.output-tab/tree)
    (tab "Attr stats" :db.ui.output-tab/attr-stats)
@@ -71,7 +71,10 @@
    [tabs/root
     {:tabs/active-id active-tab
      :tabs/on-tab-activate set-main-tab
-     :tabs/tabs (if @-sub-mobile-mode mobile-tabs desktop-tabs)}]])
+     :tabs/tabs
+     (if @-sub-mobile-mode
+       (mobile-tabs)
+       (desktop-tabs))}]])
 
 
 
