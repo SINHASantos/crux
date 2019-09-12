@@ -44,33 +44,26 @@
 (defn set-main-tab [tab-name]
   (rf/dispatch [:evt.ui.output/main-tab-switch tab-name]))
 
+(defn- tab [title tab-id]
+  {:tabs/title title
+   :tabs/href  (routes/path-for-tab tab-id)
+   :tabs/id    tab-id})
+
 (def desktop-tabs
-  [{:tabs/title "table"
-    :tabs/id :db.ui.output-tab/table}
-   {:tabs/title "tree"
-    :tabs/id :db.ui.output-tab/tree}
-   {:tabs/title "attribute frequencies"
-    :tabs/id :db.ui.output-tab/attr-stats}
-   {:tabs/title "attribute history"
-    :tabs/id :db.ui.output-tab/attr-history}
-   {:tabs/title "transactions"
-    :tabs/id :db.ui.output-tab/tx-history}
-   {:tabs/title "edn output"
-    :tabs/id :db.ui.output-tab/edn}])
+  [(tab "table" :db.ui.output-tab/table)
+   (tab "tree" :db.ui.output-tab/tree)
+   (tab "attribute frequencies" :db.ui.output-tab/attr-stats)
+   (tab "attribute history" :db.ui.output-tab/attr-history)
+   (tab "transactions" :db.ui.output-tab/tx-history)
+   (tab "edn output" :db.ui.output-tab/edn)])
 
 (def mobile-tabs
-  [{:tabs/title "Table"
-    :tabs/id :db.ui.output-tab/table}
-   {:tabs/title "Tree"
-    :tabs/id :db.ui.output-tab/tree}
-   {:tabs/title "Attr stats"
-    :tabs/id :db.ui.output-tab/attr-stats}
-   {:tabs/title "Attr history"
-    :tabs/id :db.ui.output-tab/attr-history}
-   {:tabs/title "Txes"
-    :tabs/id :db.ui.output-tab/tx-history}
-   {:tabs/title "EDN"
-    :tabs/id :db.ui.output-tab/edn}])
+  [(tab "Table" :db.ui.output-tab/table)
+   (tab "Tree" :db.ui.output-tab/tree)
+   (tab "Attr stats" :db.ui.output-tab/attr-stats)
+   (tab "Attr history" :db.ui.output-tab/attr-history)
+   (tab "Txes" :db.ui.output-tab/tx-history)
+   (tab "EDN" :db.ui.output-tab/edn)])
 
 (defn main-output-tabs [active-tab]
   [:div.output-tabs.output-tabs--main
